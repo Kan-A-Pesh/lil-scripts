@@ -4,33 +4,31 @@ This repository contains a collection of small scripts that I have written to au
 
 ## Installation
 
-To install the scripts, you can clone this repository and run the `install.sh` script.\
+To install the scripts, you can clone this repository and run the `lil-install` script.\
 This will install all the required dependencies and add the `lil-scripts` directory to your `PATH`.
 
 ```bash
 git clone https://github.com/Kan-A-Pesh/lil-scripts.git
 cd lil-scripts
-./install.sh
+./lil-install
 ```
 
 ## Updating
 
-If you want to update the scripts, you can run the `update.sh` script.
+If you want to update the scripts, you can run the `lil-update` script (from anywhere).
 
 ```bash
-cd lil-scripts
-./update.sh
+lil-update
 ```
 
 ## Uninstallation
 
-If you want to uninstall the scripts, you can run the `uninstall.sh` script.
+If you want to uninstall the scripts, you can run the `lil-uninstall` script.
 
 > **Note:** This will remove the `lil-scripts` directory from your `PATH` and delete all the scripts.
 
 ```bash
-cd lil-scripts
-./uninstall.sh
+lil-uninstall
 ```
 
 ## List of scripts
