@@ -26,6 +26,7 @@ class bcolors:
 
 parser = argparse.ArgumentParser(description='This script is a simple wrapper around `docker ps` that adds some color to the output and makes it easier to read.')
 parser.add_argument('-a', '--all', action='store_true', help='Show all containers (default shows just running)')
+parser.add_argument('-s', '--stopped', action='store_true', help='Show only stopped containers')
 parser.add_argument('-q', '--quiet', action='store_true', help='Only display container names and status')
 parser.add_argument('-v', '--verbose', action='store_true', help='Display more information about each container')
 parser.add_argument('-f', '--filter', help='Comma-separated list of filters to apply to the output names or images')
@@ -33,7 +34,7 @@ parser.add_argument('-r', '--raw', action='store_true', help='Display raw JSON o
 args = parser.parse_args()
 
 def get_raw_docker_ps():
-    if args.all:
+    if args.all or args.stopped:
         cmd = 'docker ps -a --format "{{json .}}"'
     else:
         cmd = 'docker ps --format "{{json .}}"'
@@ -50,6 +51,8 @@ def filter_containers(containers):
         filters = args.filter.split(',')
         for f in filters:
             containers = [c for c in containers if f in c['Names'] or f in c['Image']]
+    if args.stopped:
+        containers = [c for c in containers if c['State'] != "running"]
     return containers
 
 def print_container(container):
@@ -82,7 +85,13 @@ def main():
         for container in filtered_containers:
             print_container(container)
         
-        print(f"\n{bcolors.OKGRAY}Found:{bcolors.ENDC} {bcolors.OKGREEN}{len(running_containers)} Running{bcolors.ENDC} {bcolors.OKDARKGRAY}/{bcolors.ENDC} {len(filtered_containers)} Filtered {bcolors.OKDARKGRAY}({len(containers)} Total){bcolors.ENDC}")
+        if not args.quiet:
+            print("")
+
+        if args.stopped:
+            print(f"{bcolors.OKGRAY}Found:{bcolors.ENDC} {bcolors.OKYELLOW}{len(filtered_containers)} Stopped{bcolors.ENDC} {bcolors.OKDARKGRAY}({len(containers)} Total){bcolors.ENDC}")
+        else:
+            print(f"{bcolors.OKGRAY}Found:{bcolors.ENDC} {bcolors.OKGREEN}{len(running_containers)} Running{bcolors.ENDC} {bcolors.OKDARKGRAY}/{bcolors.ENDC} {len(filtered_containers)} Filtered {bcolors.OKDARKGRAY}({len(containers)} Total){bcolors.ENDC}")
 
 if __name__ == '__main__':
     main()
