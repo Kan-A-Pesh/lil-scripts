@@ -12,6 +12,6 @@ then
 fi
 
 git pull
-./install.sh --skip-installed
+lil-install --skip-installed
 
 echo "\033[92mINFO: Update complete\033[0m"
