@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+
+from rich.console import Console
+from rich.markdown import Markdown
+import os 
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+console = Console()
+
+with open(dir_path + '/README.md', 'r') as f:
+    md = Markdown(f.read())
+    console.print(md)
