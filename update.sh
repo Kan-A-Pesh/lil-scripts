@@ -1,5 +1,7 @@
 #!/bin/sh
 set -e
+BASEDIR=$(dirname "$0")
+cd $BASEDIR
 
 # Check if lil-scripts is already installed
 if ! command -v lil-help >/dev/null 2>&1

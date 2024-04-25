@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 BASEDIR=$(dirname "$0")
+cd $BASEDIR
 SKIP_INSTALLED=false
 
 # Parse arguments
@@ -105,7 +106,7 @@ echo "\033[92mINFO: Do you want lil-scripts to be added to the PATH?\033[0m"
 if prompt
 then
     # Add lil-scripts to the PATH
-    echo "export PATH=\"$BASEDIR:\$PATH\"" >> ~/.bashrc
+    echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc
     echo "\033[92mINFO: lil-scripts has been added to the PATH\033[0m"
 else
     echo "\033[93mWARN: You will need to run the scripts with ./lil-scripts/<script>\033[0m"
