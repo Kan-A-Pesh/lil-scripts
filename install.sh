@@ -1,6 +1,18 @@
 #!/bin/sh
 set -e
 BASEDIR=$(dirname "$0")
+SKIP_INSTALLED=false
+
+# Parse arguments
+while [ "$1" != "" ]; do
+    case $1 in
+        --skip-installed )     SKIP_INSTALLED=true
+                                ;;
+        * )                     echo "Invalid argument: $1"
+                                exit 1
+    esac
+    shift
+done
 
 # Prompt function
 prompt() {
@@ -16,6 +28,9 @@ prompt() {
 
 
 # Check if lil-scripts is already installed
+if ! $SKIP_INSTALLED
+then
+
 if ! command -v lil-help >/dev/null 2>&1
 then
     echo "\033[92mINFO: lil-scripts is not installed\033[0m"
@@ -32,6 +47,8 @@ else
         echo "\033[93mWARN: lil-scripts will not be reinstalled\033[0m"
         exit 1
     fi
+fi
+
 fi
 
 # Check if the user is root
@@ -81,6 +98,9 @@ fi
 
 
 # Add the script to the PATH
+if ! $SKIP_INSTALLED
+then
+
 echo "\033[92mINFO: Do you want lil-scripts to be added to the PATH?\033[0m"
 if prompt
 then
@@ -96,3 +116,5 @@ echo "\033[37mINFO: You may need to restart your terminal for changes to take ef
 echo "\033[37mINFO: You can also run \033[96msource ~/.bashrc\033[0m to apply changes immediately\033[0m"
 echo ""
 echo "\033[37mINFO: Get started by running \033[96mlil-help\033[0m command to see all available scripts\033[0m"
+
+fi

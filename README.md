@@ -13,6 +13,15 @@ cd lil-scripts
 ./install.sh
 ```
 
+## Updating
+
+If you want to update the scripts, you can run the `update.sh` script.
+
+```bash
+cd lil-scripts
+./update.sh
+```
+
 ## Uninstallation
 
 If you want to uninstall the scripts, you can run the `uninstall.sh` script.
