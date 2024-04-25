@@ -97,6 +97,8 @@ else
     echo "\033[37mINFO: Python3 is already installed, skipping...\033[0m"
 fi
 
+pip3 install -r requirements.txt
+
 
 # Add the script to the PATH
 if ! $SKIP_INSTALLED
@@ -114,8 +116,8 @@ fi
 
 echo "\033[92mINFO: Installation complete\033[0m"
 echo "\033[37mINFO: You may need to restart your terminal for changes to take effect\033[0m"
-echo "\033[37mINFO: You can also run \033[96msource ~/.bashrc\033[0m to apply changes immediately\033[0m"
+echo "\033[37mINFO: You can also run \033[96msource ~/.bashrc\033[0m\033[37m to apply changes immediately\033[0m"
 echo ""
-echo "\033[37mINFO: Get started by running \033[96mlil-help\033[0m command to see all available scripts\033[0m"
+echo "\033[37mINFO: Get started by running \033[96mlil-help\033[0m\033[37m command to see all available scripts\033[0m"
 
 fi
